@@ -1,0 +1,3 @@
+tools/ux-parity/node_modules/
+ux-parity-out/
+*.log

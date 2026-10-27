@@ -1,0 +1,153 @@
+<div id="app-container">
+  <header id="app-header">
+    <p id="app-eyebrow">Campus Portal</p>
+    <h1 id="app-title">{{ title }}</h1>
+    <p id="app-subtitle">
+      Enroll students and keep their details organized in one place.
+    </p>
+  </header>
+
+  <main id="app-main">
+    <section id="registration-section">
+      <h2 id="registration-heading">Register Student</h2>
+
+      <form id="student-form" (ngSubmit)="onSubmit()" #studentForm="ngForm">
+        <div id="field-first-name">
+          <label id="label-first-name" for="input-first-name">First Name</label>
+          <input
+            id="input-first-name"
+            name="firstName"
+            type="text"
+            [(ngModel)]="student.firstName"
+            required
+            autocomplete="given-name"
+            placeholder="Ada"
+          />
+        </div>
+
+        <div id="field-last-name">
+          <label id="label-last-name" for="input-last-name">Last Name</label>
+          <input
+            id="input-last-name"
+            name="lastName"
+            type="text"
+            [(ngModel)]="student.lastName"
+            required
+            autocomplete="family-name"
+            placeholder="Lovelace"
+          />
+        </div>
+
+        <div id="field-email">
+          <label id="label-email" for="input-email">Email</label>
+          <input
+            id="input-email"
+            name="email"
+            type="email"
+            [(ngModel)]="student.email"
+            required
+            autocomplete="email"
+            placeholder="ada@university.edu"
+          />
+        </div>
+
+        <div id="field-phone">
+          <label id="label-phone" for="input-phone">Phone</label>
+          <input
+            id="input-phone"
+            name="phone"
+            type="tel"
+            [(ngModel)]="student.phone"
+            autocomplete="tel"
+            placeholder="+1 555 0100"
+          />
+        </div>
+
+        <div id="field-course">
+          <label id="label-course" for="select-course">Course</label>
+          <select
+            id="select-course"
+            name="course"
+            [(ngModel)]="student.course"
+          >
+            <option id="option-course-empty" value="">Select a course</option>
+            @for (course of courses; track course) {
+              <option [id]="'option-course-' + course" [value]="course">{{ course }}</option>
+            }
+          </select>
+        </div>
+
+        <div id="field-enrollment-date">
+          <label id="label-enrollment-date" for="input-enrollment-date">Enrollment Date</label>
+          <input
+            id="input-enrollment-date"
+            name="enrollmentDate"
+            type="date"
+            [(ngModel)]="student.enrollmentDate"
+          />
+        </div>
+
+        <div id="form-actions">
+          <button id="btn-submit" type="submit" [disabled]="!studentForm.form.valid">
+            Add Student
+          </button>
+          <button id="btn-reset" type="button" (click)="resetForm()">
+            Reset
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section id="students-section">
+      <div id="students-header">
+        <h2 id="students-heading">Registered Students</h2>
+        <span id="students-count">{{ students.length }}</span>
+      </div>
+
+      @if (students.length === 0) {
+        <p id="students-empty">
+          No students registered yet. Add one using the form.
+        </p>
+      } @else {
+        <div id="students-grid-wrapper">
+          <table id="students-grid" border="1">
+            <thead id="students-grid-head">
+              <tr id="students-grid-head-row">
+                <th id="col-id">ID</th>
+                <th id="col-first-name">First Name</th>
+                <th id="col-last-name">Last Name</th>
+                <th id="col-email">Email</th>
+                <th id="col-phone">Phone</th>
+                <th id="col-course">Course</th>
+                <th id="col-enrollment-date">Enrollment Date</th>
+                <th id="col-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="students-grid-body">
+              @for (s of students; track s.id) {
+                <tr [id]="'student-row-' + s.id">
+                  <td [id]="'cell-id-' + s.id">{{ s.id }}</td>
+                  <td [id]="'cell-first-name-' + s.id">{{ s.firstName }}</td>
+                  <td [id]="'cell-last-name-' + s.id">{{ s.lastName }}</td>
+                  <td [id]="'cell-email-' + s.id">{{ s.email }}</td>
+                  <td [id]="'cell-phone-' + s.id">{{ s.phone || '—' }}</td>
+                  <td [id]="'cell-course-' + s.id">{{ s.course || '—' }}</td>
+                  <td [id]="'cell-enrollment-date-' + s.id">{{ s.enrollmentDate || '—' }}</td>
+                  <td [id]="'cell-actions-' + s.id">
+                    <button
+                      [id]="'btn-delete-' + s.id"
+                      type="button"
+                      (click)="deleteStudent(s.id)"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+  </main>
+</div>

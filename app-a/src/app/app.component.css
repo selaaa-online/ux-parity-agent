@@ -1,0 +1,242 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Avenir Next', Candara, Calibri, sans-serif;
+  color: #1b2a41;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 2.5rem clamp(1.25rem, 4vw, 3.5rem) 3rem;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(46, 196, 182, 0.22), transparent 42%),
+    radial-gradient(circle at 88% 8%, rgba(255, 159, 28, 0.18), transparent 36%),
+    linear-gradient(160deg, #f3f7fb 0%, #e8eef6 48%, #dfe9f4 100%);
+}
+
+.hero {
+  max-width: 1100px;
+  margin: 0 auto 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #0f766e;
+}
+
+#app-title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  color: #102a43;
+}
+
+.subtitle {
+  margin: 0.55rem 0 0;
+  max-width: 38rem;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #486581;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) 1fr;
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(16, 42, 67, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(16, 42, 67, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.form-panel {
+  padding: 1.5rem;
+}
+
+#registration-heading,
+#students-heading {
+  margin: 0 0 1.1rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #102a43;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.95rem;
+}
+
+label {
+  font-size: 0.82rem;
+  font-weight: 650;
+  color: #334e68;
+}
+
+input,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid #bcccdc;
+  border-radius: 10px;
+  background: #fff;
+  color: #102a43;
+  font: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.18);
+}
+
+.actions {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 1.25rem;
+}
+
+#btn-submit,
+#btn-reset,
+.btn-delete {
+  border: none;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+  transition: transform 0.12s ease, opacity 0.12s ease, background 0.12s ease;
+}
+
+#btn-submit {
+  flex: 1;
+  padding: 0.75rem 1.1rem;
+  background: linear-gradient(135deg, #0f766e, #0ea5a0);
+  color: #fff;
+}
+
+#btn-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+#btn-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+#btn-reset {
+  padding: 0.75rem 1.1rem;
+  background: #e6eef6;
+  color: #243b53;
+}
+
+#btn-reset:hover {
+  background: #d9e6f2;
+}
+
+.grid-panel {
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+#students-heading {
+  margin: 0;
+}
+
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  padding: 0 0.45rem;
+  border-radius: 999px;
+  background: #ccfbf1;
+  color: #0f766e;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.empty-state {
+  margin: 0;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #627d98;
+  background: #f0f4f8;
+  border-radius: 12px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid #d9e2ec;
+}
+
+#students-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+#students-grid th,
+#students-grid td {
+  padding: 0.8rem 0.9rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+#students-grid th {
+  background: #102a43;
+  color: #f0f4f8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+#students-grid tbody tr:nth-child(even) {
+  background: #f7fafc;
+}
+
+#students-grid tbody tr:hover {
+  background: #e6fffa;
+}
+
+.btn-delete {
+  padding: 0.4rem 0.8rem;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 0.8rem;
+}
+
+.btn-delete:hover {
+  background: #fecaca;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

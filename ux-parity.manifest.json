@@ -1,0 +1,110 @@
+{
+  "name": "student-registration",
+  "notes": "Fixture for the UX parity agent. app-a on port 4200 is the reference. app-b on port 4201 is the localhost target. For a real production host, point reference.baseUrl at that site and set reference.allowMutations to false unless the account is disposable.",
+  "readySelector": "#student-form",
+  "reference": {
+    "baseUrl": "http://localhost:4200",
+    "allowMutations": true
+  },
+  "target": {
+    "baseUrl": "http://localhost:4201",
+    "allowMutations": true,
+    "sourceRoot": "app-b",
+    "editAllowlist": [
+      "app-b/**/*.css",
+      "app-b/**/*.scss",
+      "app-b/**/*.html",
+      "app-b/**/*.svg",
+      "app-b/**/*.png",
+      "app-b/**/*.woff2"
+    ]
+  },
+  "viewports": [
+    { "name": "desktop", "width": 1280, "height": 900 },
+    { "name": "narrow", "width": 390, "height": 844 }
+  ],
+  "thresholds": {
+    "lookScore": 0.98,
+    "pixelMismatchRatio": 0.015,
+    "styleMatchRatio": 0.98,
+    "layoutMatchRatio": 0.95,
+    "plateauDelta": 0.005,
+    "maxIterations": 12,
+    "layoutTolerance": 2
+  },
+  "limits": {
+    "maxStates": 80,
+    "maxCrawlActions": 30,
+    "maxNodes": 350
+  },
+  "ignore": {
+    "selectors": [],
+    "styleProperties": []
+  },
+  "crawl": {
+    "actions": ["hover", "focus", "probe"]
+  },
+  "flows": [
+    {
+      "id": "resting",
+      "path": "/",
+      "steps": [
+        {
+          "id": "submit-disabled",
+          "action": "probe",
+          "capture": false,
+          "expect": {
+            "disabled": ["#btn-submit"],
+            "visible": ["#students-empty", "#student-form"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "register",
+      "path": "/",
+      "mutates": true,
+      "steps": [
+        { "id": "first-name", "action": "fill", "selector": "#input-first-name", "value": "Ada", "capture": false },
+        { "id": "last-name", "action": "fill", "selector": "#input-last-name", "value": "Lovelace", "capture": false },
+        { "id": "email", "action": "fill", "selector": "#input-email", "value": "ada@university.edu", "capture": false },
+        { "id": "phone", "action": "fill", "selector": "#input-phone", "value": "+1 555 0100", "capture": false },
+        { "id": "course", "action": "select", "selector": "#select-course", "value": "Computer Science", "capture": false },
+        {
+          "id": "filled",
+          "action": "fill",
+          "selector": "#input-enrollment-date",
+          "value": "2026-10-27",
+          "expect": {
+            "enabled": ["#btn-submit"],
+            "visible": ["#students-empty"]
+          }
+        },
+        {
+          "id": "submit",
+          "action": "click",
+          "selector": "#btn-submit",
+          "expect": {
+            "visible": ["#student-row-1", "#btn-delete-1"],
+            "hidden": ["#students-empty"],
+            "text": {
+              "#students-count": "1",
+              "#cell-first-name-1": "Ada",
+              "#cell-email-1": "ada@university.edu"
+            }
+          }
+        },
+        {
+          "id": "delete",
+          "action": "click",
+          "selector": "#btn-delete-1",
+          "expect": {
+            "visible": ["#students-empty"],
+            "hidden": ["#student-row-1"],
+            "text": { "#students-count": "0" }
+          }
+        }
+      ]
+    }
+  ]
+}
